@@ -1,0 +1,129 @@
+---
+title: "Team Evaluation"
+author: "Eric DuBose"
+date: "October 9, 2018"
+output: html_document
+---
+
+```{r setup, echo=FALSE, warning=FALSE, tidy = TRUE}
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(message = FALSE)
+sbc <- read.csv(file = "C:/Users/night/Analysis Projects/SBC/2025/midpointbatters2025.csv", header = TRUE, stringsAsFactors = FALSE) # Bringing in our dataset. I exported this as a CSV from OOTP
+colnames(sbc)[1] <- "Position" # R doesn't like OOTP's naming convention, so I cleaned it up.
+sbc["18", "Position"] <- "2B"
+LAA <- subset(sbc, TM =="LAA") #Creating a team page
+MIA <- subset(sbc, TM =="MIA")
+SEA <- subset(sbc, TM =="SEA")
+CIN <- subset(sbc, TM =="CIN")
+PHI <- subset(sbc, TM =="PHI")
+NYY <- subset(sbc, TM =="NYY")
+COL <- subset(sbc, TM =="COL")
+library(ggplot2) # GGPlot2 allows me to make these cool graphs
+library(rmarkdown) # R Markdown is a package that creates R code and HTML/PDF documents in one
+library(dplyr) # Allows for manipulation and grouping of data.
+library(png) # Needed to save the graphs as a .png file
+library(ggrepel) # Package that allows for mobility in the data labels
+library(plotly)
+```
+
+```{r WAR vs. Efficiency, echo=FALSE, warning=FALSE, tidy = TRUE}
+ggplot(COL, aes(WAR, Efficiency)) + 
+  geom_label_repel(aes(label=Last.Name), size = 3.5) + 
+  labs(title = "Rockies", x="Wins Above Replacement", y="Efficiency") + 
+  theme(plot.title = element_text(size= 20, face = "bold", color = "black", hjust=.5)) +
+  theme(axis.line = element_line(color = "black")) + 
+  theme(panel.grid.major = element_line(color = 'white')) + # Turns the major axis lines white
+  theme(panel.grid.minor = element_blank()) + # Removes the minor lines. It was confusing to have them shown.
+  theme(panel.background = element_rect(fill='#e5e4e4')) # Sets the background color of the graph.
+```
+
+This graph compares wins above replacement to defensive efficiency. Players on the far right represent a solid WAR, but where you really want the player is the top right. THat means great WAR AND great defense. Conversely, the bad, lies below 1 WAR, and below .95 Eff.
+
+
+```{r WAR vs. Zone, echo=FALSE, warning=FALSE, tidy = TRUE}
+ggplot(COL, aes(WAR, Zone.Rating)) + 
+  geom_label_repel(aes(label=Last.Name), size = 3.5) + 
+  labs(title = "Rockies", x="Wins Above Replacement", y="Zone Rating") + 
+  theme(plot.title = element_text(size= 20, face = "bold", color = "black", hjust=.5)) +
+  theme(axis.line = element_line(color = "black")) + 
+  theme(panel.grid.major = element_line(color = 'white')) + # Turns the major axis lines white
+  theme(panel.grid.minor = element_blank()) + # Removes the minor lines. It was confusing to have them shown.
+  theme(panel.background = element_rect(fill='#e5e4e4')) # Sets the background color of the graph.
+```
+
+
+Similar to the Efficiency graph, this compares WAR to Zone Rating. Same scale applies. Anything below 0 in ZR is considered subpar defensively.
+
+```{r, Defense vs. Efficiency, echo=FALSE, warning=FALSE, tidy = TRUE}
+ggplot(COL, aes(Defense, Efficiency)) + # mmmm scatterplots
+  geom_label_repel(aes(label=Last.Name), size = 3.5) + # Label_repel to prevent overlap of data labels
+  labs(title = "Rockies", x="Defensive Rating at Primary Position", y="Efficiency") + 
+  scale_x_continuous(breaks = seq(8,20,2)) + 
+  theme(plot.title = element_text(size= 20, face = "bold", color = "black", hjust=.5)) + # Setting the Title
+  theme(axis.line = element_line(color = "black")) + # Setting the axis lines black
+  theme(panel.grid.major = element_line(color = 'white')) + # Turns the major axis lines white
+  theme(panel.grid.minor = element_blank()) + # Removes the minor lines. It was confusing to have them shown.
+  theme(panel.background = element_rect(fill='#e5e4e4')) # Sets the background color of the graph.
+```
+
+
+This is an interesting comparative graph, comparing the Defensive rating of a player at thier primary position, to their defensive efficiency. Ideally, as a player's rating is higher, so should be their efficiency. This is a good graph to gauge defensive performance vs expectation.
+
+```{r, echo=FALSE, warning=FALSE, tidy = TRUE}
+ggplot(COL, aes(WAR, Salary)) + 
+  geom_label_repel(aes(label=Last.Name), size = 3.5) + 
+  labs(title = "Rockies", x="Wins Above Replacement", y="Salary in Millions") +
+  ylim(c(0, 30)) + 
+  theme(plot.title = element_text(size= 20, face = "bold", color = "black", hjust=.5)) +
+  theme(axis.line = element_line(color = "black")) + 
+  theme(panel.grid.major = element_line(color = 'white')) + # Turns the major axis lines white
+  theme(panel.grid.minor = element_blank()) + # Removes the minor lines. It was confusing to have them shown.
+  theme(panel.background = element_rect(fill='#e5e4e4')) # Sets the background color of the graph.
+```
+
+This graph, basically tells you if you're getting your money's worth, or where you are finding very valuable players. Bottom right, is ideal here. You want high war, low salary. This is your value player. What you dont want, is top left. That means low war, high salary. 
+
+```{r, echo=FALSE, warning=FALSE, tidy = TRUE}
+ggplot(COL, aes(AVG, Strikeouts)) + 
+  geom_label_repel(aes(label=Last.Name), size = 3.5) + 
+  labs(title = "Rockies") + 
+  theme(plot.title = element_text(size= 20, face = "bold", color = "black", hjust=.5)) +
+  theme(axis.line = element_line(color = "black")) + 
+  theme(panel.grid.major = element_line(color = 'white')) + # Turns the major axis lines white
+  theme(panel.grid.minor = element_blank()) + # Removes the minor lines. It was confusing to have them shown.
+  theme(panel.background = element_rect(fill='#e5e4e4')) # Sets the background color of the graph.
+```
+
+This graph compares your batters averages to the number of strikeouts they have. It's a good gauge of how well a player is making contact with the baseball, or at a minimum putting the ball in play. Better is bottom right, worst is top left.
+
+```{r, echo=FALSE, warning=FALSE, tidy = TRUE}
+ggplot(COL, aes(Salary, Efficiency)) + 
+  geom_label_repel(aes(label=Last.Name), size = 3.5) + 
+  labs(title = "Rockies") + 
+  theme(plot.title = element_text(size= 20, face = "bold", color = "black", hjust=.5)) +
+  theme(axis.line = element_line(color = "black")) + 
+  theme(panel.grid.major = element_line(color = 'white')) + # Turns the major axis lines white
+  theme(panel.grid.minor = element_blank()) + # Removes the minor lines. It was confusing to have them shown.
+  theme(panel.background = element_rect(fill='#e5e4e4')) # Sets the background color of the graph.
+```
+
+This will tell you where you're spending money defensively. Players above 1 Efficiency, and lower salary are your best value. Ideal category here is top left. Worst, is bottom right.
+
+```{r, echo=FALSE, warning=FALSE, tidy = TRUE}
+ggplot(COL, aes(Salary, Zone.Rating)) + 
+  geom_label_repel(aes(label=Last.Name), size = 3.5) + 
+  labs(title = "Rockies") + 
+  theme(plot.title = element_text(size= 20, face = "bold", color = "black", hjust=.5)) +
+  theme(axis.line = element_line(color = "black")) + 
+  theme(panel.grid.major = element_line(color = 'white')) + # Turns the major axis lines white
+  theme(panel.grid.minor = element_blank()) + # Removes the minor lines. It was confusing to have them shown.
+  theme(panel.background = element_rect(fill='#e5e4e4')) # Sets the background color of the graph.
+```
+
+This will tell you where you're spending money defensively. Players above 5 Zone Rating, and lower salary are your best value. Ideal category here is top left. Worst, is bottom right.
+
+```{r, echo = FALSE, warning = FALSE, message=FALSE}
+plot_ly(COL, x = ~CON, y = ~K, z = ~BABIP, colors = c('#f47d42', '#4186f4', '#f44141'))
+```
+
+This graph represents a 3 way relationship between Contact, Avoid K, and BABIP. The idea here is to see the success of your batters, compared to the two ratings that lead most to getting on base. 

@@ -1,0 +1,316 @@
+---
+title: <b>"WAR on Defensive Efficiency"</b>
+author: "by: Eric DuBose"
+date: "October 7, 2018"
+output:
+  html_document: 
+    toc: no
+  word_document: default
+editor_options: 
+  chunk_output_type: inline
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+Sys.setenv(RSTUDIO_PANDOC="C:/Users/night/AppData/Local/conda/conda/envs/rstudio/Library/Scripts/pandoc")
+library(ggplot2) # GGPlot2 allows me to make these cool graphs
+library(rmarkdown) # R Markdown is a package that creates R code and HTML/PDF documents in one
+library(dplyr) # Allows for manipulation and grouping of data.
+library(png) # Needed to save the graphs as a .png file
+library(ggrepel) # Package that allows for mobility in the data labels
+sbc_mid <- read.csv(file = "C:/Users/night/Analysis Projects/SBC/2025/midpointbatters2025.csv", header = TRUE, fileEncoding="UTF-8-BOM")
+sbc_end <- read.csv(file = "C:/Users/night/Analysis Projects/SBC/2025/sbc.csv", header = TRUE, fileEncoding="UTF-8-BOM")# Bringing in our dataset. I exported this as a CSV from OOTP
+Catchers_mid <- subset(sbc_mid, POS == 'C') # Creating a subset of all C
+Catchers_end <- subset(sbc_end, Position == 'C') # Creating a subset of all C
+First_Base_mid <- subset(sbc_mid, POS == '1B') # Creating a subset of all 1B
+First_Base_end <- subset(sbc_end, Position == '1B') # Creating a subset of all 1B
+Second_Base_mid <- subset(sbc_mid, POS == '2B') # Creating a subset of all 2B
+Second_Base_end <- subset(sbc_end, Position == '2B') # Creating a subset of all 2B
+Third_Base_mid <- subset(sbc_mid, POS == '3B') # Creating a subset of all 3B
+Third_Base_end <- subset(sbc_end, Position == '3B') # Creating a subset of all 3B
+Shortstop_mid <- subset(sbc_mid, POS == 'SS') # Creating a subset of all SS
+Shortstop_end <- subset(sbc_end, Position == 'SS') # Creating a subset of all SS
+Left_Field_mid <- subset(sbc_mid, POS == 'LF') # Creating a subset of all LF
+Left_Field_end <- subset(sbc_end, Position == 'LF') # Creating a subset of all LF
+Center_Field_mid <- subset(sbc_mid, POS == 'CF') # Creating a subset of all CF
+Center_Field_end <- subset(sbc_end, Position == 'CF') # Creating a subset of all CF
+Right_Field_mid <- subset(sbc_mid, POS == 'RF') # Creating a subset of all RF
+Right_Field_end <- subset(sbc_end, Position == 'RF') # Creating a subset of all RF
+```
+
+
+
+2025. This season has been intriguing to say the least. We have not seen record breaking numbers like in past seasons, however, we are seeing some very intriguing trends that our teams are producing. Most division races are extremely close. No one other than Detroit, is running away with anything. Teams have productive lineups in ways that we haven't seen in quite some time. 
+
+We all value our position players differently. Some of us use WAR, and some of us take it a bit further, and look at defensive metrics. A General Manager will often look at the big picture, see how they feel a player will perform, not just at the plate, but also with his glove. After doing some careful research, Efficiency, is a metric that I want to investigate today. While we often evaluate players with a catch all statistic like WAR, I want to compare this metric to a player’s EFF rating. I hope to accomplish a better understanding about how players are valued on a position to position basis, when considering the full picture of both offense, and defense.
+
+
+### <b>How to read these charts</b>
+
+I would like to breakdown the data analytics we are using in this article, largely to assist you, the reader, in understanding what we are looking at. You will see a grid, with two variables being compared. The X-Axis will have Wins Above Replacement (WAR), and the Y-Axis will have Efficiency(EFF). The axes will vary based on position, largely because the data that we use will be framed to best fit the data, as opposed to fitting a predetermined boundary. Here's the quick way to read this.
+
+* Positive WAR, and Efficiency > 1.0 : The player is not just creating wins for his team, but also, is better than league average defensively. Without him on the field, you will lose more than you are winning. 
+
+* Positive WAR, and Efficiency < 1.0: The player is contributing to your teams wins more than an average guy would... but his defense is keeping him from contributing more. 
+
+* Negative WAR, and Efficiency > 1.0: The player, for lack of a better term, even though they are defensively better than average, are hurting your team. They essentially aren't cutting it at the plate, and the only saving grace, is that they can play defense.
+
+* Negative WAR, and Efficiency < 1.0: In Cleveland we call this standard... but this is bad. You don't want to be here. The player, is not only defensively below average, but they are losing you games more than an average guy would. 
+
+
+#### <b>Efficiency explained</b>
+Efficiency is a metric, that measures the plays made by a fielder, in his zone, compared to the league average for that position.
+
+* 1.050 and above: Gold Glove Caliber potential
+* 1.025 - 1.010: Above Average Defense
+* 1.010 to .990: Average Defense
+* .989 to .950: Below Average
+* .950 and below: Pit of misery. No dilly.
+
+
+### <b>Now, onto the Positions!</b>
+
+```{r Catchers, message=FALSE, warning=FALSE, tidy = TRUE}
+# This Code snippet will only appear once - I wanted to show how I made the following graphs.h
+
+ggce <- ggplot(Catchers, aes(WAR, Efficiency)) + # Makes a scatterplot, plotting WAR to the X-Axis, Efficiency to the Y-Axis
+  geom_label_repel(aes(label=Name), size = 4) + # I chose to repel the labels, so that they wouldn't overlap. 
+  labs(title = "Catchers", x="Wins Above Replacement", y="Efficiency") + # Labeling the graph as noted
+  theme(plot.title = element_text(size= 20, face = "bold", color = "black", hjust=.5)) + # Styles the title of the graph
+  theme(axis.line = element_line(color = "black")) + # Styles the axes lines
+  theme(panel.grid.major = element_line(color = 'white')) + # Turns the major axis lines white
+  theme(panel.grid.minor = element_blank()) + # Removes the minor lines. It was confusing to have them shown.
+  theme(panel.background = element_rect(fill='#e5e4e4')) # Sets the background color of the graph.
+ggsave(filename='catchers_eff.png', plot=ggce) # Saves the file to a png for future usage
+ggce # Displays my graph =)
+```
+***
+Catchers are a tricky bunch to evaluate. Defensive metrics never like catchers very much, and honestly... catchers never really like them either. That said, it's worth taking a good look at. 
+
+Immediately, I notice that of the starting catchers we have that met the criteria, we only have 5 guys under 0 WAR. That's surprising. Of those guys, only Mike Zunino fits the dreaded negative war, below average defense category. 
+
+Looking at the standouts, we can see some early leaders for best catchers in the league. Contreras, Vazquez, Adams, Sisco, Marrero all have some good arguments that can be made, and a few guys are close behind in Baldo, Collet, and Banfield. 
+
+Taking a closer look at Marrero, he appears to be a top notch defensive catcher, who is absolutely destroying other guys defensively.
+This season, Elih Marrero has played 70 games, and has only 4 errors all year. He's got a CERA of 3.36 and has contributed to more outs than just strikeouts with 49 assists. His bat, on the other hand, while not bad per se, hitting a .260/.339/.386 slash line, is at a 90+ OPS, showing that his defensive prowess is one of the major contributors to his additions to the Phillies win column.
+
+On the WAR side, let's look at Joenny Vazquez, of Texas, is mashing the baseball. .284/.336/.551 (21 homeruns), and has a WAR of 2.7, the highest in this list. OPS+ of 124 puts him above the average batter by far. Defensively, He's got 7 errors, and a significantly higher CERA than Marrero. He's allowed more Passed balls, and while he's overall in the average category by the rankings above, he's on the borderline of below average defensively.
+***
+
+```{r First Basemen, echo=FALSE, message=FALSE, warning=FALSE}
+gg1be <- ggplot(First_Base, aes(WAR, Efficiency)) + 
+  geom_label_repel(aes(label=Name), size = 4) + 
+  labs(title = "First Basemen", x="Wins Above Replacement", y="Efficiency") + 
+  theme(plot.title = element_text(size= 20, face = "bold", color = "black", hjust=.5)) +
+  ylim(.85, 1.15) + 
+  theme(axis.line = element_line(color = "black")) + 
+  theme(panel.grid.major = element_line(color = 'white')) + # Turns the major axis lines white
+  theme(panel.grid.minor = element_blank()) + # Removes the minor lines. It was confusing to have them shown.
+  theme(panel.background = element_rect(fill='#e5e4e4')) # Sets the background color of the graph.
+
+ggsave(filename='1b_eff.png', plot=gg1be)
+gg1be
+```
+
+***
+Right off the bat, I had to make a major adjustment. Houston has a player in Bryan Muniz, who has played only 1 game briefly as a catcher, and the game counted him in this, as he has met the requirements of 200 PA for the dataset. I had to alter the limits of the axis to allow for the player to be excluded from the First Basemen analysis. 
+
+We've got two players below 0 WAR at this point. Dominic Smith (TEX), and Josh Britt (CHC). Britt has what appears to be some nice talent, and some insane power, but a weak eye. He's also very young and made the jump from A+ to the ML this year. His low defensive production also can be explained by the amount of errors he has made. Dominic Smith, is a bit more unusual. He's hit 10 Homeruns, and his hitting a .250/.303/.387 slash line. He's taken some hits to his eye and appears to be losing his ability to read the strike zone as he ages. Defensively, he's doing just fine.
+
+On the flip side, Nick Pratto (BAL) has absolutely taken over the WAR race. He's almost at 4 WAR and is above average defensively. He's the front runner for top 1B of the year, although Sano, Korman, Aceves, Tark, Bellinger are all knocking on the door. Speaking of Ik Sung Tark (DET), the Sherriff of Swattingham is absolutely crushing the position defensively. In 77 Games, he has only 2 errors, with outstanding range relative for a first baseman. 
+
+As for the rest of the pack, I find it intriguing that only a few guys are in a bad spot defensively at first base. Sure, we have a decent number of guys who have some woes but are still reasonably within limits of average. Kiriloff (CLE), Collins (CHW), Goldschmidt (LAA), Bradley (LAA) are the only ones who just aren't hacking it at 1st.
+***
+
+```{r Second Basemen, echo=FALSE, message=FALSE, warning=FALSE}
+gg2be <- ggplot(Second_Base, aes(WAR, Efficiency)) + 
+  geom_label_repel(aes(label=Name), size = 4) + 
+  labs(title = "Second Basemen", x="Wins Above Replacement", y="Efficiency") + 
+  theme(plot.title = element_text(size= 20, face = "bold", color = "black", hjust=.5)) + 
+  theme(axis.line = element_line(color = "black")) + 
+  theme(panel.grid.major = element_line(color = 'white')) + # Turns the major axis lines white
+  theme(panel.grid.minor = element_blank()) + # Removes the minor lines. It was confusing to have them shown.
+  theme(panel.background = element_rect(fill='#e5e4e4')) # Sets the background color of the graph.
+
+ggsave(filename='2b_eff.png', plot=gg2be)
+gg2be
+```
+
+***
+Let's start by ripping the Band-Aid right off. Kevin Newman (CHC), is abysmal defensively this year. So much so that he's not even yet 1.0 WAR hitting .297/.352/.441 in 73 games. 5 Errors, isn't so bad, but his Zone Rating, is -10.2. He's not making plays that the rest of the league would routinely make, and his efficiency is .883. That said, he's got a good bat. That's his saving grace. 
+
+The rest of the starting 2B, excluding Albarado (TB) have a positive WAR. There are a healthy number of guys below average defensively at 2B, suggesting to me that there could be some jobs won in those positions. A lot of teams have made tradeoffs for quality bats in place of quality defense as evidenced by this graph, myself included with Jorenby (CLE). On the flip side, we're looking at Gimenez (CIN) as the best defensive 2B, Bregman (HOU) as the best WAR, and for the best combination of the two, Leyva (WSH), and Garcia (POR) are leading the charge, with Albies (MIN) closely behind. 
+
+Andres Gimenez, an elite defensive player, who could start at any infield spot for basically any team defensively, is built on speed and defense. He's a decent bat, although one could argue below replacement level. He's a 1.0 WAR player, and according to his OPS+ of 75, he's below average in hitting, so most of this is defense. He's getting hits at a decent clip though, .275/.310/.367. If he can get on base a bit more, this player could contend for more than a Gold Glove.
+
+Alex Bregman, an offensive juggernaut and top player in this league has been consistently playing at 6+ WAR each season since 2020. He's got a good set of defensive skills, and plays above average, albeit barely as a defender. Without question, he's one of the better players in this league, and it shows here, as he's knocking on 4 WAR, with > 1.0 Efficiency.
+
+***
+
+```{r Third Basemen, echo=FALSE, message=FALSE, warning=FALSE}
+gg3be <- ggplot(Third_Base, aes(WAR, Efficiency)) + 
+  geom_label_repel(aes(label=Name), size = 4) + 
+  labs(title = "Third Basemen", x="Wins Above Replacement", y="Efficiency") + 
+  theme(plot.title = element_text(size= 20, face = "bold", color = "black", hjust=.5)) + 
+  theme(axis.line = element_line(color = "black")) + 
+  theme(panel.grid.major = element_line(color = 'white')) + # Turns the major axis lines white
+  theme(panel.grid.minor = element_blank()) + # Removes the minor lines. It was confusing to have them shown.
+  theme(panel.background = element_rect(fill='#e5e4e4')) # Sets the background color of the graph.
+
+ggsave(filename='3b_eff.png', plot=gg3be)
+gg3be
+
+```
+
+***
+Third Base, in 2021 in SBC was one hell of a tough spot. We didn't have much talent in the pipeline and didn't have many guys playing at a respectable clip. Looking at this graph, more than half the league's starters at this position are below 1.0 Efficiency. To say the least, a quality defensive 3rd baseman who can hit, is a premium in SBC.
+
+Kole Enright (3B) is downright struggling at almost every level. He's barely above replacement level as a player, and defensively, he looks like he belongs on Cleveland. Though, his his ratings don't suggest that he should be struggling as mightily as he is defensively. 13 Range, 14 Error, and a 19 Arm at 3rd base isn't bad, and with a 14 Turn DP, he should be at a minimum, respectable. He's drastically underperforming as a fielder this year so far. At the plate, he's not doing bad, but nothing to scream about. 
+
+Machado (TEX) while aging, is having an exemplary season. On pace for almost 8 WAR, he's also top 10 in defense in SBC. Ratings, ironically are like Enright's (13,14,20,13), which makes me wonder even more, what makes a 3rd Baseman elite defensively. He's having a fantastic year at the plate, with a .299/.384/.581 slash line, with 26 Homeruns... which at this point of the year is insane. He may be aging, but this is his world right now. 
+
+A few other guys are having respectable seasons, and are very close to the WAR output, but are more average defensively. There are also a few young guys who are showing some defensive chops in Stevens (LAD), and Almanzar (PHI), who as they grow as players, could step into that upper echelon.
+
+Finally, Ke'Bryan Hayes (COL) has the best Efficiency at 3B in SBC. While it looks impressive on the chart, He's performing very well this year at 3rd, with an EFF of 1.065, ZR of 3, and only two errors at the hot corner. He's got an outstanding Error rating, and his fielding ratings are respectable (13,20,18,10).
+
+***
+
+```{r Shortstops, echo=FALSE, message=FALSE, warning=FALSE}
+ggsse <- ggplot(Shortstop, aes(WAR, Efficiency)) + 
+  geom_label_repel(aes(label=Name), size = 4) + 
+  labs(title = "Shortstops", x="Wins Above Replacement", y="Efficiency") + 
+  theme(plot.title = element_text(size= 20, face = "bold", color = "black", hjust=.5)) + 
+  theme(axis.line = element_line(color = "black")) + 
+  theme(panel.grid.major = element_line(color = 'white')) + # Turns the major axis lines white
+  theme(panel.grid.minor = element_blank()) + # Removes the minor lines. It was confusing to have them shown.
+  theme(panel.background = element_rect(fill='#e5e4e4')) # Sets the background color of the graph.
+
+ggsave(filename='ss_eff.png', plot=ggsse)
+ggsse
+```
+
+***
+No position is arguably more important to the team defensively than a shortstop. In SBC, we have a similar issue with our Shortstops as we do with our 3rd Basemen. Over half of the starters, are below average defensively, or close. On the flip side, often, a team's shortstop is usually one of the lesser batters, as they are usually defensive specialists. 
+
+Not in SBC. 
+
+We have two guys below 0 War, and 10 total below 1 WAR. The low man on the pole belongs to Imani Willis (NYM), whom is the only player who is both a negative war, and a bad efficiency rating. Willis is hitting .227/.313/.321 and is a painful .898 efficiency rating. I don't want to knock on the player too hard, but he's basically getting an error every 28 chances. In the world of elite defense, that's .... bad. Willy Adames (MIN) isn't doing much better, who is barely above 0 WAR at 0.3, and he's defensively probably more suited to play 3rd. In a tiny sample size of 3 games this season, he was efficient there, and played a a nice clip, but as a shortstop, he's worse than Willis, Efficiency rating of .874. 
+
+On the upside, when we factor both Defense and Offense into the role, it's a two-man race. Brendan Rodgers (HOU) is leading the pack in WAR, but he's below average defensively this season. Dansby Swanson (LAD), and Xavier Edwards (DET) are leading the pack. Xavier Edwards has absolutely studly ratings defensively, although his turn DP is a bit low it's still respectable (20, 20, 18, 15). He's hitting .287/.387/.410, and is not just a defensive stud, but a staple in a juggernaut Detroit offense. He's got 4 of the 5 tools, power being the only missing one. With an efficiency this season of 1.103, he might very well be the best defender in SBC. Dansby Swanson, brings a higher WAR to the table (3.6 vs 3.1), and solid ratings defensively(18,18,17,17). He's got 4 of 5 tools as well, with speed being his weakest link. He has a great work ethic, and is a great leader, and with an Efficiency of 1.056, he too, is in the elite of what teams want in a shortstop. 
+
+Everyone else is chasing these guys. We do have some intriguing players who excel defensively, and some who excel offensively, as shown above.
+
+***
+
+```{r Left Fielders, echo=FALSE, message=FALSE, warning=FALSE}
+gglfe <- ggplot(Left_Field, aes(WAR, Efficiency)) + 
+  geom_label_repel(aes(label=Name), size = 4) + 
+  labs(title = "Left Fielders", x="Wins Above Replacement", y="Efficiency") + 
+  theme(plot.title = element_text(size= 20, face = "bold", color = "black", hjust=.5)) + 
+  theme(axis.line = element_line(color = "black")) + 
+  theme(panel.grid.major = element_line(color = 'white')) + # Turns the major axis lines white
+  theme(panel.grid.minor = element_blank()) + # Removes the minor lines. It was confusing to have them shown.
+  theme(panel.background = element_rect(fill='#e5e4e4')) # Sets the background color of the graph.
+
+ggsave(filename='lf_eff.png', plot=gglfe)
+gglfe
+```
+
+***
+I want you to go look very closely at this graph. It's well known in our iteration of OOTP 19, that most players can by default shifted to LF or 2B, to get their "best" ratings, based off the way it's calculated. 11 players, are above the threshold of 1.0 efficiency. Of those 11 guys, only 9 of them are "Above average". SBC has a defensive weakness in leftfield, leaguewide. A lot of the guys are legitimately weak defensively, including the studly Christian Yelich (ATL). Some guys make up for it with their bats. Vela, Bauers, Serrano, Bell. Others bring amazing defense such as Meadows, Benintendi but aren't bringing the bat. Only one guy is egregiously poor defensively, in Jorge Nava (HOU). Hitting a very respectable .266/.341/.550 with 20 Homeruns, he's being held back by his Efficiency of .905. He's just simply not getting it done. He doesn't have many errors, but the biggest issue he faces is poor coverage of his zone, and his outfield range supports that (7). The data suggests that he simply doesn't make the plays that the rest of the league routinely make.
+
+While it's easy to pick Yelich due to his insane WAR (He's going to hit 9 again this year), I want to make a pitch for two other guys to consider as the best LF in SBC when considering the full package. Alex Verdugo (WAS), and Yoan Moncada (LAD). Both guys are hitting at respectful rates and putting up good numbers overall. Moncada, while he's not hitting at a career best pace, is still at a respectable 2.6 WAR, and is the best defensive LF in SBC. With an Efficiency rating of 1.051, and ZERO errors in 141 chances, he's dominant out in left.  Verdugo, is having one of the better seasons of his career, on pace for matching his 2021 WAR of 6.3. He's hitting .314/.366/.544, has 20 Homeruns, 69 RBI (Gabe votes yes), and has 17 Doubles. Defensively, he's got 1 error in 191 chances, and is making more plays in LF than most in this league do. He's got an EFF Rate of 1.031 and will likely contend for a gold glove. Yes, Yelich is the best hitter... but I believe Verdugo or Moncada may be the best Left Fielder.
+***
+
+```{r Center Fielders with outlier, echo=FALSE, message=FALSE, warning=FALSE}
+ggcfe <- ggplot(Center_Field, aes(WAR, Efficiency)) + 
+  geom_label_repel(aes(label=Name), size = 4) + 
+  labs(title = "Center Fielders (With Holmes)", x="Wins Above Replacement", y="Efficiency") + 
+  theme(plot.title = element_text(size= 20, face = "bold", color = "black", hjust=.5)) + 
+  theme(axis.line = element_line(color = "black")) + 
+  theme(panel.grid.major = element_line(color = 'white')) + # Turns the major axis lines white
+  theme(panel.grid.minor = element_blank()) + # Removes the minor lines. It was confusing to have them shown.
+  theme(panel.background = element_rect(fill='#e5e4e4')) # Sets the background color of the graph.
+
+ggsave(filename='cf_eff(outlier).png', plot=ggcfe)
+ggcfe
+```
+
+***
+I want to take a moment to give a shout out to this kid at the top of this draft. He's without a doubt, SBC's version of Kevin Kiermaier. This season, he is hitting .214/.260/.319. He has 12 stolen bases, 5 homeruns, 16 doubles, in 336 plate appearances. He is not someone who you would expect to be at the top of a list for anything. However, this young man, a 26-year-old Center Fielder, per the Efficiency stat, is the best defender(Non-Catcher), in all of SBC. EFF Rating of 1.147, ZR of 11.3, 1 error in 181 attempts. This kid is Quentin Holmes (PIT). 
+
+On the flip side, we have a kid who is a barely above average bat but is struggling mightily defensively. He has an efficiency rating of only .933, and a poor zone rating as well of -7.4. This kid, is Clint Frazier (NYY)
+
+I wanted to show you this graph with these guys included... but for the analysis, it would be wise to remove them from this, as they are statistical outliers. With that said, here's the updated graph.
+***
+
+```{r Center Fielders without outlier, echo=FALSE, message=FALSE, warning=FALSE}
+ggcfeo <- ggplot(Center_Field, aes(WAR, Efficiency)) + 
+  geom_label_repel(aes(label=Name), size = 4) + 
+  ylim(.975,1.075) +
+  labs(title = "Center Fielders (No Outlier)", x="Wins Above Replacement", y="Efficiency") + 
+  theme(plot.title = element_text(size= 20, face = "bold", color = "black", hjust=.5)) + 
+  theme(axis.line = element_line(color = "black")) + 
+  theme(panel.grid.major = element_line(color = 'white')) + # Turns the major axis lines white
+  theme(panel.grid.minor = element_blank()) + # Removes the minor lines. It was confusing to have them shown.
+  theme(panel.background = element_rect(fill='#e5e4e4')) # Sets the background color of the graph.
+
+ggsave(filename='cf_eff(outlier).png', plot=ggcfeo)
+ggcfeo
+```
+
+***
+Now that we removed the outliers, we have a clearer picture of the players left. You can tell by this graph that SBC GM's focus on keeping quality defenders in Center Field. Like Shortstop, it's the heartbeat of the outfield, as Short is for the infield. All but 6 of these guys, are average or above average defensively. We have 3, who are gold glove candidates right now. 
+
+Let's start with the Detroit GM's favorite player of all time, Mike Trout. In WAR, it's his world, and we're all living in it. He's well on his way to another 9+ WAR season and is performing at a ridiculous clip at the plate. As hard as this may be to believe, Trout's best career year was 2024. He is coming off the best season he's ever hard. His slash line, is crazy right now. He's hitting .300/.432/.610. He has 25 Homeruns. 19 Doubles. his ISO is .310. Defensively, he has put together quite a year so far. His Efficiency is average at 1.01, and while it's nothing spectacular... it's enough to keep him in contention for MVP, and best CF in SBC. He's not alone though this time. There are a few young guys, who are not so high in WAR, but in defense that are challenging to climb the ladder. 
+
+Luis Soto (CLE) is hitting at a 3.2 WAR pace but has terrific ratings. His bat is a bit below average, but he's underperformed relative to last season. Defensively, he is versatile, and efficient to a gold glove level. Efficiency rating of 1.05, ZR of 3.4, and ZERO errors in 251 opportunities. However, he's not the closest. A likely surprise candidate is the young, explosive Billy Lasley (SEA). Lasley is extremely fast, has great hands, and while his arm isn't the strongest, gets the job done very well. His WAR is 3.4, on pace for 6.2 this season, and he's hitting .332/.371/.485, which is impressive. In his second season, he's already surpassed his WAR for last season, so this kid has lots of growing and potential for success. Fielding, he's up there, with an Efficiency of 1.03, ZRT or 2, and again ZERO errors out of 262 chances. 
+
+This is going to be interesting to see over the next few years, as the talent level in CF has spiked in recent seasons.
+
+
+***
+
+```{r Right Fielders, echo=FALSE, message=FALSE, warning=FALSE}
+ggrfe <- ggplot(Right_Field, aes(WAR, Efficiency)) + 
+  geom_label_repel(aes(label=Name), size = 4) + 
+  labs(title = "Right Fielders", x="Wins Above Replacement", y="Efficiency") + 
+  theme(plot.title = element_text(size= 20, face = "bold", color = "black", hjust=.5)) + 
+  theme(axis.line = element_line(color = "black")) + 
+  theme(panel.grid.major = element_line(color = 'white')) + # Turns the major axis lines white
+  theme(panel.grid.minor = element_blank()) + # Removes the minor lines. It was confusing to have them shown.
+  theme(panel.background = element_rect(fill='#e5e4e4')) # Sets the background color of the graph.
+ggsave(filename='rf_eff.png', plot=ggrfe)
+ggrfe
+```
+
+***
+Finally, we look at right fielders, and what a wide range we have here. Of course, Bryce Harper (NYY) leads the pack with the lead for WAR in all of SBC at 5.2, and on pace for a 9.4. He's hitting .309/.426/.745, and currently has hit the 40-homerun mark before we've even made it to the All-Star Break. Serrano's record of 78 could be in jeopardy, although Harper is currently under the pace to achieve that tremendous feat. Defensively, Harper is a bit of a liability, but the tradeoff is reasonable. He's only at .977 Efficiency, but it's easy to overlook with his offensive prowess. 
+
+On the negative side, we have a 10 guys who are below 0 WAR, and of those ten, nine are below 1.0 Efficiency. Right Field is getting close to the point in SBC that SS/3B is at... scarcity in quality defense. We have a lot of youth in this list too, seeing Victor Robles (TB), Rahim Kidd(DET) and others. 
+
+The top defensive right fielders go to Brandon Marsh(LAA), and Garrett Mitchell (CLE). Both players are gold glove caliber guys and could contend for that easily as the season progresses. Mitchell is error free in 141 opportunities, and has an EFF of 1.085, and Marsh, the better defender is also error free in 122 opportunities, with an EFF of 1.122. What will likely differentiate Mitchell from Marsh will be his bat. Mitchell has an excellent bat that has recently started to get back to the form from 2024, and currently sitting at 2.5 WAR.
+
+***
+
+
+### <b>Summary and Wrap up</b>
+
+We learned a lot about our players today in SBC. Hopefully you have some takeaway from this to further investigate your team, and see what players you can improve, or valuate in a different eye than you may have before. I also think the analysis has brought up new questions. 
+
+* Do other players affect a player's effeiecncy, and how so? 
+* Since Efficiency is calcuated based on the rest of the league's performance, what factors contribute to the league as a whole playing better or worse defense? 
+* Are pitchers directly affecting a catcher's ability to be a better defender?
+* What's the sweet spot for players? All in on Defense, all in on offense, or in the middle? What's the equilibrium? 
+
+All these ideas can be further discussed. I'd love your comments, questions, suggestions, and thoughts. 
+
+Complaints, can go to Gabe, he'll ensure you are heard.
+
+Thanks for reading!
+
+- Commish
+
+
+
+
