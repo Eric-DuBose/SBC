@@ -1,0 +1,7 @@
+continent_id,name,abbreviation,demonym,population,main_language_id
+1,"Africa","AF","African",1000010000,0
+2,"Asia","AS","Asian",2147483647,0
+3,"Europe","EU","European",731000000,0
+4,"North America","NA","North American",528720588,0
+5,"Oceania","OC","Oceanic",35670000,0
+6,"South America","SA","South American",385742554,0
