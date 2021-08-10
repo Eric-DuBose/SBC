@@ -8714,54 +8714,106 @@ team_id,year,league_id,sub_league_id,division_id,name,abbr,nickname,best_hitter_
 862,2039,101,1,0,"Tallahassee HS","TAL","Emeralds",7578,19208,3785,0,0,0,0,4
 862,2040,101,1,0,"Tallahassee HS","TAL","Emeralds",7578,19260,36442,0,0,0,0,3
 863,2039,102,0,0,"Charlotte College","CHA","Biplanes",49090,49080,49095,0,1,0,0,2
+863,2040,102,0,0,"Charlotte College","CHA","Biplanes",45142,49080,48940,0,1,0,0,1
 864,2039,102,0,3,"Anaheim College","ANA","Mutiny",49387,49380,49395,0,1,0,0,2
+864,2040,102,0,3,"Anaheim College","ANA","Mutiny",44002,27858,27844,0,0,0,0,5
 865,2039,102,0,1,"Jacksonville College","JAC","Freedom",49117,49102,49120,0,1,0,0,2
+865,2040,102,0,1,"Jacksonville College","JAC","Freedom",49119,49100,48864,0,1,0,0,1
 866,2039,102,0,3,"Gilbert College","GIL","Norsemen",49361,49349,49370,0,0,0,0,3
+866,2040,102,0,3,"Gilbert College","GIL","Norsemen",27863,49349,50061,0,0,0,0,3
 867,2039,102,0,2,"Kansas City College","KC","Raptors",49244,49221,49245,0,0,0,0,4
+867,2040,102,0,2,"Kansas City College","KC","Raptors",29148,42352,50122,0,1,0,0,1
 868,2039,102,0,2,"Austin College","AUS","Metro Stars",49294,49272,49295,0,0,0,0,2
+868,2040,102,0,2,"Austin College","AUS","Metro Stars",49293,44246,48840,0,1,0,0,2
 869,2039,102,0,2,"Irving College","IRV","Hot Rods",49267,49250,49270,0,0,0,0,3
+869,2040,102,0,2,"Irving College","IRV","Hot Rods",28342,28591,48951,0,1,0,0,3
 870,2039,102,0,3,"Seattle College","SEA","Maroons",49462,49451,49470,0,0,0,0,5
+870,2040,102,0,3,"Seattle College","SEA","Maroons",49466,27050,49468,0,0,0,0,4
 871,2039,102,0,1,"Toledo College","TOL","Blizzard",49133,49126,49145,0,0,0,0,5
+871,2040,102,0,1,"Toledo College","TOL","Blizzard",32327,32449,32327,0,0,0,0,4
 872,2039,102,0,0,"Washington College","WAS","Flying Squirrels",49017,49001,49020,0,1,0,0,3
+872,2040,102,0,0,"Washington College","WAS","Flying Squirrels",49013,33389,33083,0,0,0,0,3
 873,2039,102,0,3,"Sacramento College","SAC","Reds",49443,49423,49445,0,0,0,0,4
+873,2040,102,0,3,"Sacramento College","SAC","Reds",27271,27354,27267,0,1,0,0,1
 874,2039,102,0,2,"El Paso College","EP","Pilgrims",49344,49329,49345,0,0,0,0,5
+874,2040,102,0,2,"El Paso College","EP","Pilgrims",50111,27996,48935,0,0,0,0,5
 875,2039,102,0,1,"Milwaukee College","MIL","Mavericks",49168,49152,49170,0,0,0,0,3
+875,2040,102,0,1,"Milwaukee College","MIL","Mavericks",49161,31695,31298,0,1,0,0,2
 876,2039,102,0,0,"Boston College","BOS","Emeralds",48990,48978,48995,0,0,0,0,5
+876,2040,102,0,0,"Boston College","BOS","Emeralds",33546,48972,50235,0,1,0,0,2
 877,2039,102,0,2,"San Antonio College","SA","River Otters",49308,49297,49320,0,1,0,0,1
+877,2040,102,0,2,"San Antonio College","SA","River Otters",49313,28228,28008,0,0,0,0,4
 878,2039,102,0,3,"Los Angeles College","LA","Blue Sox",49420,49405,49420,0,1,0,0,1
+878,2040,102,0,3,"Los Angeles College","LA","Blue Sox",27550,49399,27501,0,0,0,0,2
 879,2039,102,0,1,"Madison College","MAD","Thunder Dogs",49186,49174,49195,0,1,0,0,1
+879,2040,102,0,1,"Madison College","MAD","Thunder Dogs",30677,1089,43473,0,0,0,0,5
 880,2039,102,0,0,"Charlotte College","CHA","Jays",49063,49055,49070,0,1,0,0,1
+880,2040,102,0,0,"Charlotte College","CHA","Jays",49061,20150,50172,0,0,0,0,5
 881,2039,102,0,1,"New Orleans College","NO","Bengals",49217,49199,49220,0,0,0,0,4
+881,2040,102,0,1,"New Orleans College","NO","Bengals",49213,49205,46009,0,0,0,0,3
 882,2039,102,0,0,"Hialeah College","HIA","Oilmen",49040,49022,49045,0,0,0,0,4
+882,2040,102,0,0,"Hialeah College","HIA","Oilmen",50015,32990,48905,0,0,0,0,4
 883,2039,102,1,2,"Ft. Worth College","FW","Wolfhounds",49766,49751,49770,0,1,0,0,1
+883,2040,102,1,2,"Ft. Worth College","FW","Wolfhounds",49764,49754,23717,0,1,0,0,1
 884,2039,102,1,2,"Austin College","AUS","Snake Eyes",49788,49779,49795,0,0,0,0,3
+884,2040,102,1,2,"Austin College","AUS","Snake Eyes",49786,23710,48879,0,1,0,0,2
 885,2039,102,1,0,"Indianapolis College","IND","Sun Sox",49595,49576,49595,0,0,0,0,4
+885,2040,102,1,0,"Indianapolis College","IND","Sun Sox",49595,25624,25480,0,1,0,0,2
 886,2039,102,1,3,"Bakersfield College","BAK","Lake Monsters",49911,49901,49920,0,1,0,0,1
+886,2040,102,1,3,"Bakersfield College","BAK","Lake Monsters",23098,50075,23098,0,1,0,0,1
 887,2039,102,1,0,"Hampton College","HAM","Volcanoes",49511,49506,49520,0,0,0,0,5
+887,2040,102,1,0,"Hampton College","HAM","Volcanoes",25932,26042,25932,0,1,0,0,1
 888,2039,102,1,0,"Detroit College","DET","Lugnuts",49543,49522,49545,0,0,0,0,2
+888,2040,102,1,0,"Detroit College","DET","Lugnuts",40347,49522,47503,0,0,0,0,3
 889,2039,102,1,2,"Ft. Worth College","FW","Red Foxes",49743,49725,49745,0,0,0,0,4
+889,2040,102,1,2,"Ft. Worth College","FW","Red Foxes",49744,44267,48887,0,0,0,0,3
 890,2039,102,1,0,"Philadelphia College","PHI","Colonials",49492,49475,49495,0,1,0,0,1
+890,2040,102,1,0,"Philadelphia College","PHI","Colonials",49494,26695,26044,0,0,0,0,4
 891,2039,102,1,0,"Indianapolis College","IND","Gold Rush",49563,49547,49570,0,0,0,0,3
+891,2040,102,1,0,"Indianapolis College","IND","Gold Rush",42466,25924,25827,0,0,0,0,5
 892,2039,102,1,3,"Fontana College","FON","Commodores",49859,49850,49870,0,1,0,0,4
+892,2040,102,1,3,"Fontana College","FON","Commodores",49865,23434,23352,0,0,0,0,5
 893,2039,102,1,1,"Tulsa College","TUL","Barbarians",49667,49649,49670,0,0,0,0,3
+893,2040,102,1,1,"Tulsa College","TUL","Barbarians",23986,24117,23977,0,1,0,0,2
 894,2039,102,1,3,"Oakland College","OAK","Rogues",49966,49946,49970,0,1,0,0,3
+894,2040,102,1,3,"Oakland College","OAK","Rogues",42677,22829,22793,0,0,0,0,2
 895,2039,102,1,1,"Omaha College","OMA","Mohawks",49690,49679,49695,0,0,0,0,4
+895,2040,102,1,1,"Omaha College","OMA","Mohawks",23839,42860,23803,0,0,0,0,5
 896,2039,102,1,1,"Ft. Worth College","FW","Hornets",49717,49707,49720,0,1,0,0,1
+896,2040,102,1,1,"Ft. Worth College","FW","Hornets",39756,49701,50079,0,0,0,0,4
 897,2039,102,1,2,"San Diego College","SD","Sea Lions",49840,49823,49845,0,0,0,0,5
+897,2040,102,1,2,"San Diego College","SD","Sea Lions",49842,23509,23467,0,0,0,0,5
 898,2039,102,1,2,"San Diego College","SD","Capitals",49811,49801,49820,0,1,0,0,2
+898,2040,102,1,2,"San Diego College","SD","Capitals",23589,43503,23510,0,0,0,0,4
 899,2039,102,1,1,"Houston College","HOU","Hawks",49642,49634,49645,0,0,0,0,2
+899,2040,102,1,1,"Houston College","HOU","Hawks",49645,49625,24185,0,1,1,0,1
 900,2039,102,1,3,"Santa Clarita College","SC","Fisher Cats",49894,49880,49895,0,0,0,0,5
+900,2040,102,1,3,"Santa Clarita College","SC","Fisher Cats",49890,40549,23129,0,0,0,0,3
 901,2039,102,1,1,"St. Louis College","SL","76ers",49618,49596,49620,0,0,0,0,5
+901,2040,102,1,1,"St. Louis College","SL","76ers",49618,25273,24715,0,1,0,0,3
 902,2039,102,1,3,"San Jose College","SJ","Rainiers",49940,49928,49945,0,1,1,0,2
+902,2040,102,1,3,"San Jose College","SJ","Rainiers",22930,43490,22885,0,0,0,0,4
 903,2039,103,0,0,"Brooklyn College","BRO","Isotopes",49988,49981,49995,0,0,0,0,4
+903,2040,103,0,0,"Brooklyn College","BRO","Isotopes",22694,49971,22694,0,0,0,0,5
 904,2039,103,0,0,"Memphis College","MEM","Yaks",50069,50054,50070,0,0,0,0,5
+904,2040,103,0,0,"Memphis College","MEM","Yaks",22218,22256,22184,0,0,0,0,4
 905,2039,103,0,0,"Phoenix College","PHO","Rivermen",50091,50079,50095,0,0,0,0,3
+905,2040,103,0,0,"Phoenix College","PHO","Rivermen",952,50082,21980,0,0,0,0,3
 906,2039,103,0,0,"Los Angeles College","LA","Grasshoppers",50120,50102,50120,0,0,0,0,6
+906,2040,103,0,0,"Los Angeles College","LA","Grasshoppers",21790,21936,21781,0,0,0,0,6
 907,2039,103,0,0,"Columbus College","COL","Zebras",50039,50032,50045,0,1,1,0,2
+907,2040,103,0,0,"Columbus College","COL","Zebras",50033,22479,22270,0,1,0,0,2
 908,2039,103,0,0,"Jersey City College","JC","Swordsmen",50017,50004,50020,0,1,0,0,1
+908,2040,103,0,0,"Jersey City College","JC","Swordsmen",22533,50004,22531,0,1,1,0,1
 909,2039,103,1,0,"Austin College","AUS","Mutiny",50263,50246,50270,0,0,0,0,5
+909,2040,103,1,0,"Austin College","AUS","Mutiny",19546,37871,20904,0,0,0,0,5
 910,2039,103,1,0,"Chicago College","CHI","Red Raiders",50245,50221,50245,0,0,0,0,6
+910,2040,103,1,0,"Chicago College","CHI","Red Raiders",50233,50225,42294,0,0,0,0,6
 911,2039,103,1,0,"Chicago College","CHI","Cubs",50219,50202,50220,0,1,0,0,2
+911,2040,103,1,0,"Chicago College","CHI","Cubs",50215,21203,21021,0,1,0,0,1
 912,2039,103,1,0,"Indianapolis College","IND","Thrashers",50191,50173,50195,0,0,0,0,3
+912,2040,103,1,0,"Indianapolis College","IND","Thrashers",21235,21308,21231,0,0,0,0,3
 913,2039,103,1,0,"Jacksonville College","JAC","Sundevils",50136,50129,50145,0,0,0,0,4
+913,2040,103,1,0,"Jacksonville College","JAC","Sundevils",21583,43932,21583,0,1,0,0,2
 914,2039,103,1,0,"Indianapolis College","IND","Rush",50166,50147,50170,0,1,0,0,1
+914,2040,103,1,0,"Indianapolis College","IND","Rush",21338,462,21327,0,0,0,0,4
